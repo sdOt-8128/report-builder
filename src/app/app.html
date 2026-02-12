@@ -1,0 +1,46 @@
+<mat-toolbar class="app-toolbar">
+  <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle navigation">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="app-title">Mandalay</span>
+  <span class="app-subtitle">Report Builder</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [opened]="sidenavOpened" class="app-sidenav">
+    <div class="sidenav-header">
+      <mat-icon class="sidenav-header-icon">analytics</mat-icon>
+      <span>Views</span>
+    </div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/report/transactions" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>receipt_long</mat-icon>
+        <span matListItemTitle>Transactions</span>
+      </a>
+      <a mat-list-item routerLink="/report/products" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>inventory_2</mat-icon>
+        <span matListItemTitle>Products</span>
+      </a>
+      <a mat-list-item routerLink="/report/clients" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>business</mat-icon>
+        <span matListItemTitle>Clients</span>
+      </a>
+      <a mat-list-item routerLink="/report/vehicles" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>local_shipping</mat-icon>
+        <span matListItemTitle>Vehicles</span>
+      </a>
+
+      <div class="sidenav-divider"></div>
+
+      <a mat-list-item routerLink="/administration" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+        <span matListItemTitle>Administration</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>
