@@ -1,59 +1,118 @@
-1# ReportBuilder
+# Mandalay Report Builder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+A UI prototype for a Report Builder application built for **AMCS Group**, designed for the **Mandalay** weighbridge and facility management product. Built with Angular 21 and Angular Material.
 
-## Development server
+## Features
 
-To start a local development server, run:
+### Data Table
+- Sortable, paginated table with sticky headers and resizable columns
+- Loads a 1,000-row sample CSV dataset (Transactions view)
+- Pagination options: 25, 50, or 100 rows per page
+
+### Column Selection
+- Two-panel drag-and-drop dialog to include/exclude columns
+- Reorder columns by dragging within the included list
+- Reset to default column configuration
+- 12 default columns: TicketNumber, DateIn, DateOut, SiteName, LicencePlate, TotalExTax, Levy, Tax, TotalRevenue, ProductWeightTonnes, Quantity, UnitPrice
+
+### Filtering
+- Excel-style column filtering from header buttons
+- Checkbox list of unique values per column with search
+- Select All / Clear quick actions
+- Multiple simultaneous filters with visual indicators
+
+### Grouping
+- Drag column headers to a group bar above the table
+- Multi-level grouping support
+- Expandable/collapsible group rows with aggregated numeric totals
+- Reorder and remove groups via drag-and-drop chips
+
+### Export
+- Toolbar buttons for CSV, Excel, and PDF export (UI only — no file generation)
+
+### Templates
+- Save and load report templates (name, description, column config, filters, grouping)
+- Delete saved templates
+- Three pre-loaded mock templates
+- In-memory storage only (no backend persistence)
+
+### Permissions
+- Administration page with a roles and permissions matrix
+- Four mock roles: Administrator, Report Manager, Analyst, Viewer
+- CRUD + Export + Manage Templates permissions across Reports, Templates, and Users
+
+### Navigation
+- Sidebar with five data views: Transactions, Products, Clients, Vehicles, Administration
+- Transactions view is fully implemented; others show placeholder pages
+
+## Tech Stack
+
+- **Angular** 21.1 (standalone components, signals, lazy-loaded routes)
+- **Angular Material** 21.1 (table, toolbar, sidenav, dialogs, menus, chips, drag-and-drop)
+- **TypeScript** 5.9
+- **SCSS** for component-scoped styles
+- **Vitest** for unit testing
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v20+)
+- npm
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Development Server
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open [http://localhost:4200](http://localhost:4200) in your browser. The app reloads automatically on file changes.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build artifacts are output to the `dist/` directory.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Run Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Project Structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+src/app/
+├── features/
+│   ├── report/
+│   │   ├── report-page.ts              # Main report container
+│   │   └── components/
+│   │       ├── data-table/             # Table with sorting, grouping, pagination
+│   │       ├── column-filter/          # Excel-style column filter dropdown
+│   │       ├── group-bar/              # Drag-and-drop grouping bar
+│   │       └── report-toolbar/         # Export, template, and column buttons
+│   ├── column-selection/               # Column include/exclude dialog
+│   ├── templates/                      # Save and load template dialogs
+│   ├── administration/                 # Permissions page
+│   └── placeholder/                    # Placeholder for unimplemented views
+├── services/
+│   ├── csv-data.service.ts             # CSV loading and parsing
+│   ├── filter.service.ts               # Column filter state and logic
+│   ├── grouping.service.ts             # Grouping state management
+│   ├── column-config.service.ts        # Column selection and ordering
+│   ├── template.service.ts             # Report template management
+│   └── export.service.ts               # Export placeholders
+└── models/
+    ├── column-definition.model.ts
+    ├── report-template.model.ts
+    └── permission.model.ts
+```
